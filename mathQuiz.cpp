@@ -1,5 +1,5 @@
 #include "config.h"
-#include <time.h>
+#include "questionGenerator.h"
 
 void main() {
 	
@@ -82,9 +82,4 @@ void main() {
 
 	printf("You solved %d %s questions with %.1f\% accuracy in %dmin. %dsec.", num, typeString, (double) correct / num, (startTime - endTime) / 60, (startTime - endTime) % 60);
 
-}
-
-int question(char typeChar) {
-	srand(time(NULL));
-	
 }
