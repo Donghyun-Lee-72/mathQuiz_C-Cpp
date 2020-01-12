@@ -1,9 +1,10 @@
 #include "config.h"
 #include "questionGenerator.h"
 
+
 void main() {
 	
-	printf("welcome to the simple math quiz program!\n");
+	printf("Welcome to the simple math quiz program!\n");
 
 //	let user chose type of questions
 	int type;
@@ -43,15 +44,17 @@ void main() {
 			printf("You chose Multiplication problem.\n");
 			typeString = (char*)malloc(sizeof(char) * 15);
 			strcpy_s(typeString, 15, "Multiplication");
-			typeChar = '¡¿';
+			typeChar = 'x';
 			break;
 		case 4:
 			printf("You chose Division problem.\n");
-			printf("You MUST write answer to tenth decimal.\n");
+			printf("You MUST round your answer to two decimal place.\n");
 			typeString = (char*)malloc(sizeof(char) * 9);
 			strcpy_s(typeString, 9, "Division");
-			typeChar = '¡À';
+			typeChar = '/';
 			break;
+		default:
+			typeString = (char*)malloc(sizeof(int) * 1);
 	}
 
 //	number of questions to solve
@@ -72,14 +75,16 @@ void main() {
 	}
 
 	int correct = 0;
+	int solved = 0;
 	int startTime = time(NULL);
 	for (int i = 0; i < num; i++) {
-		if (question(typeChar) == 1) {
+		if (question(typeChar, type, solved) == 1) {
 			correct++;
 		}
+		solved++;
 	}
 	int endTime = time(NULL);
 
-	printf("You solved %d %s questions with %.1f\% accuracy in %dmin. %dsec.", num, typeString, (double) correct / num, (startTime - endTime) / 60, (startTime - endTime) % 60);
+	printf("\nYou solved %d %s questions with %4.1f%% accuracy(%d correct, %d wrong) in %dmin. %dsec.\n", num, typeString, (double)correct / num * 100, correct, num - correct, (endTime - startTime) / 60, (endTime - startTime) % 60);
 
 }
